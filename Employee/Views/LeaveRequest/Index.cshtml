@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "LeaveRequest";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+
+@model List<LeaveRequest>
+
+<h1>Leave Requests</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Employee Name</th>
+            <th>Leave Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+     
+        @if (Model != null)
+        {
+            foreach (var request in Model)
+            {
+                var employee = GetEmployeeById(request.EmployeeId);
+                <tr>
+                    <td>@employee.FirstName</td>
+                    <td>@request.Type</td>
+                    <td>@request.StartDate.ToShortDateString()</td>
+                    <td>@request.EndDate.ToShortDateString()</td>
+                    <td>@request.Status</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <p>No leave requests to display.</p>
+        }
+
+    </tbody>
+</table>
+
+@functions {
+    
+    public Employee GetEmployeeById(int employeeId)
+    {
+        
+        return new Employee();
+    }
+}
+
